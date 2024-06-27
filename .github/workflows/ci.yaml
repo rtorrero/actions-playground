@@ -17,7 +17,7 @@ jobs:
     needs: my-job    
     steps:
       - name: Echo something
-        run: echo "I need to echo something!"
+        run: exit 1
 
   is-false-job:
     runs-on: ubuntu-latest

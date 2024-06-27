@@ -7,18 +7,23 @@ jobs:
       - name: my-step
         run: echo "Hello World!"
       - name: Set output
+        id: set-output
         run: echo "echo_msg=true" >> $GITHUB_ENV
-  
+    outputs:
+      echo_msg: ${{ steps.set-output.outputs.echo_msg }}
+
   is-true-job:
     runs-on: ubuntu-latest
-    if: env.echo_msg == 'true'
+    needs: my-job
+    if: ${{ needs.my-job.outputs.echo_msg == 'true' }}
     steps:
-      - name:
+      - name: Echo something
         run: echo "I need to echo something!"
 
   is-false-job:
     runs-on: ubuntu-latest
-    if: env.echo_msg != 'true'
+    needs: my-job
+    if: ${{ needs.my-job.outputs.echo_msg != 'true' }}
     steps:
-      - name:
+      - name: Shut up
         run: echo "I shut up"

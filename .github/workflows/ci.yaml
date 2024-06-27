@@ -8,7 +8,7 @@ jobs:
         run: echo "Hello World!"
       - name: Set output
         id: set-output
-        run: echo "echo_msg=true" >> $GITHUB_ENV
+        run: echo "echo_msg=true" >> $GITHUB_OUTPUT
     outputs:
       echo_msg: ${{ steps.set-output.outputs.echo_msg }}
 

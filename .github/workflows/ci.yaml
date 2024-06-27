@@ -6,3 +6,19 @@ jobs:
     steps:
       - name: my-step
         run: echo "Hello World!"
+      - name: Set output
+        run: echo "echo_msg=true" >> $GITHUB_ENV
+  
+  is-true-job:
+    runs-on: ubuntu-latest
+    if: env.echo_msg == 'true'
+    steps:
+      - name:
+        run: echo "I need to echo something!"
+
+  is-false-job:
+    runs-on: ubuntu-latest
+    if: env.echo_msg != 'true'
+    steps:
+      - name:
+        run: echo "I shut up"

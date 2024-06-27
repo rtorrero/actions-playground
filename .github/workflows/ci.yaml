@@ -14,12 +14,13 @@ jobs:
 
   other-job:
     runs-on: ubuntu-latest
-    needs: my-job    
+    needs: my-job
+    continue-on-error: true
     steps:
       - name: Echo something
         run: exit 1
 
-  is-false-job:
+  is-true-job:
     runs-on: ubuntu-latest
     needs: [my-job, other-job]
     if: ${{ needs.my-job.outputs.echo_msg == 'true' }}
